@@ -10,8 +10,8 @@ The demo uses [dlt](https://github.com/dlt-hub/dlt) create a pipeline and orches
 
 The diagram above illustrates the dlt data pipeline being orchestrated using dagster:
 1. A dlt resource (github_issues) yields the data from the GitHub API and passes the data to a dagster asset.
-2. A dagster configurable resource (Class: DltPipeline) which has a create_pipeline pipeline.
-3. A dagster asset that takes the configurable resource (Class: DltPipeline) and dlt resource (github_issues) to execute the pipeline.
+2. A dagster configurable resource (Class: DltResource) which has a create_pipeline pipeline.
+3. A dagster asset that takes the configurable resource (Class: DltResource) and dlt resource (github_issues) to execute the pipeline.
 
 ## How to run the pipeline
 The repo consists of two seperate dagster projects:
