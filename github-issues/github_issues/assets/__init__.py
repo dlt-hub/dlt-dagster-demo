@@ -1,16 +1,11 @@
 from dagster import asset, get_dagster_logger, AssetExecutionContext, MetadataValue
-from ..resources import DltPipeline
+from ..resources import DltResource
 from ..dlt import github_issues_resource
 
 @asset
-def issues_pipeline(context: AssetExecutionContext, pipeline: DltPipeline):
-    pipeline_name= 'github_issues'
-    dataset= 'dagster_github_issues'
-    destination= 'bigquery'
-    table= 'github_issues'
-
+def issues_pipeline(context: AssetExecutionContext, pipeline: DltResource):
     logger = get_dagster_logger()
-    results = pipeline.create_pipeline(pipeline_name, dataset, destination, github_issues_resource, table)
+    results = pipeline.create_pipeline(github_issues_resource)
     logger.info(results)
 
     md_content=""
