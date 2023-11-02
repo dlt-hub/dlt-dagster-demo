@@ -2,17 +2,22 @@ from dagster import ConfigurableResource
 
 import dlt
 
-class DltPipeline(ConfigurableResource):
+class DltResource(ConfigurableResource):
+    pipeline_name: str
+    dataset_name: str
+    destination: str
+    table_name: str
 
-    def create_pipeline(self, pipeline_name ,dataset_name, destination, dlt_resource, table_name):
+
+    def create_pipeline(self, dlt_resource):
 
         # configure the pipeline with your destination details
         pipeline = dlt.pipeline(
-        pipeline_name=pipeline_name, destination=destination, dataset_name=dataset_name
+        pipeline_name=self.pipeline_name, destination=self.destination, dataset_name=self.dataset_name
         )
 
         # run the pipeline with your parameters
-        load_info = pipeline.run(dlt_resource, table_name=table_name)
+        load_info = pipeline.run(dlt_resource, table_name=self.table_name)
 
         return load_info
 
