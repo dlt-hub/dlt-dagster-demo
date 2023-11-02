@@ -5,13 +5,12 @@ from ..resources import DltResource
 import dlt
 import os
 
-url = os.getenv('SOURCES__MONGODB__CONNECTION__URL')
+URL = os.getenv('SOURCES__MONGODB__CONNECTION__URL')
 
-database_collection = {
+DATABASE_COLLECTIONS = {
     "sample_mflix": [
-        "sessions",
-        "theaters",
-        "users"
+        "comments",
+        "embedded_movies",
     ],
 }
 
@@ -31,7 +30,7 @@ def dlt_asset_factory(collection_list):
         def collections_asset(context: OpExecutionContext, pipeline: DltResource):
 
             # Getting Data From MongoDB    
-            data = mongodb(url, db).with_resources(*collection_name)
+            data = mongodb(URL, db).with_resources(*collection_name)
 
             logger = get_dagster_logger()
             results = pipeline.load_collection(data, db)
@@ -44,4 +43,4 @@ def dlt_asset_factory(collection_list):
     return multi_assets
 
 
-dlt_assets = dlt_asset_factory(database_collection)
+dlt_assets = dlt_asset_factory(DATABASE_COLLECTIONS)

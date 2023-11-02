@@ -7,7 +7,7 @@ defs = Definitions(
     assets=dlt_assets,
     resources={
         "pipeline": DltResource(
-            pipeline_name = "mongo",
+            pipeline_name = "mongo_local",
             dataset_name = "dagster_mongo",
             destination = "bigquery"
         ),
