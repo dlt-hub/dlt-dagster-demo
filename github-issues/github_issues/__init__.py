@@ -14,7 +14,6 @@ defs = Definitions(
             pipeline_name = "github_issues",
             dataset_name = "dagster_github_issues",
             destination = "bigquery",
-            table_name= "github_issues"
         ),
     }
 )
