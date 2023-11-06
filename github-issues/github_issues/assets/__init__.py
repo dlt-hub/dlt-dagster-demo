@@ -5,7 +5,7 @@ from ..dlt import github_issues_resource
 @asset
 def issues_pipeline(context: AssetExecutionContext, pipeline: DltResource):
     logger = get_dagster_logger()
-    results = pipeline.create_pipeline(github_issues_resource)
+    results = pipeline.create_pipeline(github_issues_resource, table_name='github_issues')
     logger.info(results)
 
     md_content=""
